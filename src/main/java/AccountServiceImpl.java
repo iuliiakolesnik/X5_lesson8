@@ -5,10 +5,7 @@ import java.sql.*;
 
 public class AccountServiceImpl implements AccountService {
 
-    //private ArrayList<Account> accountList = new ArrayList<Account>();
     private static String dbUrl;
-    private static String user;
-    private static String pass;
 
     private Connection connection = null;
 
@@ -22,18 +19,8 @@ public class AccountServiceImpl implements AccountService {
         }
     }
 
-
-    public AccountServiceImpl(String dbUrl, String user, String pass) {
-        this.dbUrl = dbUrl;
-        this.user = user;
-        this.pass = pass;
-
-        try {
-            this.connection = DriverManager.getConnection(dbUrl, user, pass);
-        } catch (SQLException e) {
-            System.out.println("Connection Failed");
-            e.printStackTrace();
-        }
+    public void closeConnection() throws SQLException {
+        connection.close();
     }
 
     public Connection getConnection() {
